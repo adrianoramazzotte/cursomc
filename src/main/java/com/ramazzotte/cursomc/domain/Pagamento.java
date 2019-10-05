@@ -10,16 +10,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ramazzotte.cursomc.domain.enuns.EstadoPagamento;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pagamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	
+	@Id	
 	private Integer id;
 	private Integer estado;
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId

@@ -16,13 +16,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Pedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@JsonFormat(pattern= "dd/MM/yyyy HH:mm")
 	private Date instante;
+	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
 	@ManyToOne
@@ -47,7 +52,7 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 		this.cliente = cliente;
 	}
-	
+	@JsonIgnore
 	public List<Pedido> getPedidos(){
 		List<Pedido> lista = new ArrayList<>();
 		for(ItemPedido x : itens) {
