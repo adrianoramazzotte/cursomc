@@ -60,17 +60,11 @@ public class CategoriaResource {
 	public ResponseEntity<Page<CategoriaDto>> findPage(
 			@RequestParam(value="page",defaultValue = "0")Integer page,
 			@RequestParam(value="linesPerPage",defaultValue = "24") Integer linesPerPage,
-			@RequestParam(value="direction",defaultValue = "nome")String direction,
-			@RequestParam(value="orderBy",defaultValue = "ASC")String orderBy){
-		Page<Categoria>list =service.findPage(page,linesPerPage,direction,orderBy);
+			@RequestParam(value="orderBy",defaultValue = "nome")String orderBy,
+			@RequestParam(value="direction",defaultValue = "ASC")String direction){
+		Page<Categoria>list =service.findPage(page,linesPerPage,orderBy,direction);
 		Page<CategoriaDto>listDto = list.map(obj -> new CategoriaDto(obj));
 		return ResponseEntity.ok().body(listDto);
 	}
-		
-			
-			
-			
-	
-	
 		
 }
