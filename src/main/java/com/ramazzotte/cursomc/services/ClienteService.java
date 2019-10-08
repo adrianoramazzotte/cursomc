@@ -30,7 +30,8 @@ public class ClienteService {
 	}
 	
 	public Cliente update(Cliente obj) {
-		find(obj.getId());
+		Cliente newObj = find(obj.getId());
+		updateData(newObj,obj);
 		return repo.save(obj);
 	}
 
@@ -55,6 +56,10 @@ public class ClienteService {
 	
 	public Cliente fromDTO(ClienteDto objDto) {
 		return new Cliente(objDto.getId(),objDto.getNome(), objDto.getEmail(),null,null);
+	}
+	private void updateData(Cliente newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
 	}
 
 }
