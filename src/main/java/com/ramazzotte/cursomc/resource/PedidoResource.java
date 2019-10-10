@@ -12,7 +12,7 @@ import com.ramazzotte.cursomc.services.PedidoService;
 
 @RestController
 @RequestMapping(value="/pedidos")
-public class PadidoResource {
+public class PedidoResource {
 	@Autowired
 	private PedidoService service;
 	

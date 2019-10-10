@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.ramazzotte.cursomc.domain.Cliente;
 
-public class ClienteDto implements Serializable{
+public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -19,14 +19,14 @@ public class ClienteDto implements Serializable{
 	@Email
 	private String email;
 	
-	public ClienteDto() {
+	public ClienteDTO() {
 		
 	}
 
-	public ClienteDto(Cliente obj) {
+	public ClienteDTO(Cliente obj) {
 		id = obj.getId();
 		nome = obj.getNome();
-		email = obj.getNome();
+		email = obj.getEmail();
 	}
 
 	public Integer getId() {
