@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ramazzotte.cursomc.domain.Categoria;
+import com.ramazzotte.cursomc.domain.Cliente;
 import com.ramazzotte.cursomc.domain.Produto;
 import com.ramazzotte.cursomc.repositories.CategoriaRepository;
 import com.ramazzotte.cursomc.repositories.ProdutoRepository;
@@ -23,6 +24,10 @@ public class ProdutoService {
 	private CategoriaRepository categoriaRepository;
 	
 
+	public Page<Produto>findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction),orderBy);
+		return repo.findAll(pageRequest);
+	}
 	public Produto find(Integer id) {
 		Optional<Produto> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(

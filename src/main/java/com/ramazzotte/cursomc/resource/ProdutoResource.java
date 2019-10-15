@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ramazzotte.cursomc.domain.Cliente;
 import com.ramazzotte.cursomc.domain.Produto;
+import com.ramazzotte.cursomc.dto.ClienteDTO;
 import com.ramazzotte.cursomc.dto.ProdutoDTO;
 import com.ramazzotte.cursomc.resource.utils.URL;
 import com.ramazzotte.cursomc.services.ProdutoService;
@@ -27,7 +29,16 @@ public class ProdutoResource {
 		Produto obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+	@RequestMapping(value="/page",method = RequestMethod.GET)
+	public ResponseEntity<Page<ProdutoDTO>> findPage(
+			@RequestParam(value="page",defaultValue = "0")Integer page,
+			@RequestParam(value="linesPerPage",defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue = "nome")String orderBy,
+			@RequestParam(value="direction",defaultValue = "ASC")String direction){
+		Page<Produto>list =service.findPage(page,linesPerPage,orderBy,direction);
+		Page<ProdutoDTO>listDto = list.map(obj -> new ProdutoDTO(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<ProdutoDTO>> findPage(
 			@RequestParam(value="nome",defaultValue = "")String nome,
